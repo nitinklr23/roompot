@@ -2,21 +2,21 @@ import React, { useState, useCallback, useMemo, useRef } from 'react';
 
 import { View, Text, StyleSheet, TouchableOpacity, Button, Modal, TouchableWithoutFeedback, GestureResponderEvent } from 'react-native'
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator, useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import { NavigationContainer } from '@react-navigation/native';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/Home/HomeScreen';
 
-import ActivitiesScreen from '../screens/ActivitiesScreen';
+import ActivitiesScreen from '../screens/Activity/ActivitiesScreen';
 
-import FacilitiesScreen from '../screens/FacilitiesScreen';
+import FacilitiesScreen from '../screens/Facility/FacilitiesScreen';
 
-import MyBottomSheet from './../components/BottomSheet'
+import MyBottomSheet from '../components/common/BottomSheet/BottomSheet'
 
-import MapScreen from '../screens/MapScreen';
+import MapScreen from '../screens/Map/MapScreen';
 
 import { EvilIcons } from '@expo/vector-icons';
 
@@ -46,6 +46,8 @@ const TabNavigator: React.FC = () => {
 
   const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
 
+  const tabBarHeight = 80;
+
   const TabButton: React.FC<TabButtonProps> = ({ onPress, children }) => {
     return (
       <TouchableOpacity
@@ -71,6 +73,7 @@ const TabNavigator: React.FC = () => {
                 {...props}
                 onPress={(event) => {
                   if (props.onPress) {
+                    setBottomSheetVisible(false);
                     props.onPress(event); // Call props.onPress with the event
                   }
                 }}
@@ -82,6 +85,7 @@ const TabNavigator: React.FC = () => {
          component={HomeScreen} 
          options={{
           tabBarLabel: 'Home',
+          headerShown: false,
           tabBarIcon: ({ color, size }) => ( <AntDesign name="home" color={color} size={size} /> )
         }}/>
         <Tab.Screen 
@@ -110,21 +114,20 @@ const TabNavigator: React.FC = () => {
         />
         <Tab.Screen 
             name="More" 
-            component={MyBottomSheet} 
+            component={FacilitiesScreen} 
             options={{
               tabBarLabel: 'More',
               tabBarIcon: ({ color, size }) => ( <Feather name="more-horizontal" color={color} size={size} /> )
             }}
             listeners={() => ({
               tabPress: (e) => {
-                alert('test')
                 setBottomSheetVisible(!isBottomSheetVisible);
                 e.preventDefault();
               }
             })}
         />
         </Tab.Navigator>
-        { isBottomSheetVisible && <MyBottomSheet></MyBottomSheet> }
+        { isBottomSheetVisible && <MyBottomSheet bottomInset={tabBarHeight}></MyBottomSheet> }
     </View>
   );
 };

@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import { View, Text, StyleSheet, ViewStyle, TextStyle, TextInput, TouchableOpacity } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from './../types/NavigationTypes'; 
+import { RootStackParamList } from './../../types/NavigationTypes'; 
 import * as Yup from 'yup';
-import { colors } from '../config/colors';
-import TextInputIcon from '../components/TextInput';
-import Button from '../components/Button';
+import { colors } from '../../config/colors';
+import TextInputIcon from '../../components/ui/TextInput';
+import Button from '../../components/ui/Button';
 import { useFormik } from 'formik';
 
 type LoginScreenProps = StackScreenProps<RootStackParamList, 'Login'>;

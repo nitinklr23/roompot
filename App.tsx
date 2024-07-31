@@ -1,27 +1,17 @@
 import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import LandingScreen from './screens/LandingScreen';
-import LoginScreen from './screens/LoginScreen';
-import AppNavigator from './navigations/AppNavigator';
+import LandingScreen from './src/screens/Landing/LandingScreen';
+import LoginScreen from './src/screens/Auth/LoginScreen';
+import AppNavigator from './src/navigations/AppNavigator';
 import { Entypo } from '@expo/vector-icons';
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
-
-import { useCustomFonts } from './config/fonts';
-
+import { useCustomFonts } from './src/config/fonts';
 import * as SplashScreen from 'expo-splash-screen';
-
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-
-import { BottomSheetProvider } from './context/BottomSheetContext'; // Adjust path as necessary
-
-
-
-
-import { RootStackParamList } from './types/NavigationTypes'; 
+import { RootStackParamList } from './src/types/NavigationTypes'; 
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-
 
 SplashScreen.preventAutoHideAsync();
 

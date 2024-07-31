@@ -8,8 +8,11 @@ import {
   BottomSheetModalProvider,
 } from '@gorhom/bottom-sheet';
 
+interface MyBottomSheetProps {
+  bottomInset: number
+}
 
-const MyBottomSheet = () => {
+const MyBottomSheet = ({bottomInset} : MyBottomSheetProps ) => {
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -46,6 +49,7 @@ const MyBottomSheet = () => {
               index={0}
               snapPoints={snapPoints}
               onChange={handleSheetChanges}
+              bottomInset={bottomInset}
             >
               <View style={styles.contentContainer}>
                 <Text>Awesome 🎉</Text>
